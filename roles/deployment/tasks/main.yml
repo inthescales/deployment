@@ -1,0 +1,30 @@
+- name: install git
+  apt:
+    name: git
+
+- name: Add deploy group
+  group:
+    name: deploy
+    state: present
+
+- name: Add deploy user
+  user:
+    name: deploy
+    password: $6$dJwCpV7D/49n0/TH$zfHveCn6u.1ffQ6ciHjmRVDe4EvlfDtefU4jfqrO/IV/MJaNQ1jatSi/QefyTZc40XaFgPYY1l6Trr2Xm2Efr/
+    group: deploy
+    shell: /bin/bash
+
+- name: Add authorized key to deploy user
+  authorized_key:
+    user: deploy
+    state: present
+    key: "{{ lookup('file', '/Users/robin/.ssh/id_rsa.pub') }}"
+    
+- name: Allow 'deploy' group to have passwordless sudo
+  lineinfile:
+    dest: /etc/sudoers
+    state: present
+    regexp: '^%deploy'
+    line: '%deploy ALL=(ALL) NOPASSWD: ALL'
+    validate: 'visudo -cf %s'
+    
