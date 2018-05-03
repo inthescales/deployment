@@ -1,0 +1,11 @@
+- name: install python 2.7.6
+  apt:
+    name: python2.7
+
+- name: install pip
+  apt:
+    name: python-pip
+
+- name: install python package tweepy
+  pip:
+    name: tweepy

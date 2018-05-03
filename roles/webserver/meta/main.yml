@@ -1,0 +1,15 @@
+---
+dependencies:
+  - role: nginx
+    configuration_templates:
+      enable: true
+      opensource:
+        user: nginx
+        worker_processes: 1
+        error_level: warn
+        worker_connections: 1024
+        keepalive_timeout: 65
+        listen: 80
+        server_name: localhost
+        root: /var/www/html/site
+        index: main_en.html index.html index.htm
