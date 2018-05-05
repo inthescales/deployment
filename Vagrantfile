@@ -72,7 +72,12 @@ Vagrant.configure(2) do |config|
   # SHELL
 
   config.vm.provision "site", type: "ansible" do |ansible|
-    ansible.playbook = "Playbook.yml"
+    ansible.playbook = "playbooks/playbook-site.yml"
+    ansible.inventory_path = "./hosts/vagrant-hosts"
+  end
+    
+  config.vm.provision "bots", type: "ansible" do |ansible|
+    ansible.playbook = "playbooks/playbook-bots.yml"
     ansible.inventory_path = "./hosts/vagrant-hosts"
   end
 end

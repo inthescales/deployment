@@ -27,6 +27,10 @@ if [ -z $dest ]; then
     dest=$default_destination
 fi
 
+# Get address
+
+address=$(grep vagrant hosts/deploy-hosts | sed -n 's/.*=\(.*\)/\1/p')
+
 # Update from repository
 
 cd repositories/Sinuous-Rill-Site/
@@ -41,10 +45,10 @@ cd ../..
 
 # Prepare remote for copy
 
-ssh -o "StrictHostKeyChecking no" "$user@$target" "sudo mkdir -p $dest; sudo chown deploy:deploy $dest"
+ssh -o "StrictHostKeyChecking no" "$user@$address" "sudo mkdir -p $dest; sudo chown deploy:deploy $dest"
 
 # Copy files to destination
 
-scp -r -o 'StrictHostKeyChecking no' repositories/Sinuous-Rill-Site/output/* "${user}@${target}:${dest}"
+scp -r -o 'StrictHostKeyChecking no' repositories/Sinuous-Rill-Site/output/* "${user}@${address}:${dest}"
 
 exit

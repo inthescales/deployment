@@ -1,9 +1,0 @@
-- name: install python 2.7.6
-  apt:
-    name: python
-    version: 2.7.6
-
-- name: configure python packages
-  pip:
-    - name: install tweepy
-    name: tweepy

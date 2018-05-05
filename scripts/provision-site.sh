@@ -42,7 +42,7 @@ if [ ${target} != ${k_vagrant} ]; then
     # Install dependencies for and run ansible
     
     ssh -o "StrictHostKeyChecking no" "${provisioning_user}@$target" "apt-get install python"
-    ansible-playbook Playbook.yml -i "hosts/${target}-hosts" -vvvv
+    ansible-playbook playbooks/playbook-site.yml -i "hosts/${target}-hosts" -vvvv
 fi
 
 # Set up ssh login for deploy user
