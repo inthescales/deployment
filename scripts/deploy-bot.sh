@@ -80,7 +80,7 @@ echo "Deactivated running bot"
 
 # Prepare remote for copy
 
-ssh -o "StrictHostKeyChecking no" "$user@$address" " rm -rf $dest; sudo mkdir -p $dest; sudo chown deploy:deploy $dest"
+ssh -o "StrictHostKeyChecking no" "$user@$address" "sudo rm -rf $dest; sudo mkdir -p $dest; sudo chown deploy:deploy $dest"
 
 # Copy files to destination
 
