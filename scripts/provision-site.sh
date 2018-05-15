@@ -13,17 +13,7 @@ target_vagrant="vagrant"
 target_staging="staging"
 target_production="production"
 
-address_vagrant="192.168.33.10"
-address_staging=${address_vagrant}
-address_production="www.sinuousrill.com"
-
-if [ $target == $target_vagrant ]; then
-    address=$address_vagrant
-elif [ $target == $target_staging ]; then
-    address=$address_staging
-elif [ $target == $target_production ]; then
-    address=$address_production
-fi
+address=$(sh scripts/helpers/host-address.sh $target)
 
 if [ ${target} == ${k_vagrant} ]; then
     provisioning_user="vagrant"

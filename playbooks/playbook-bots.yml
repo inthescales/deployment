@@ -6,5 +6,4 @@
   become_method: sudo
   
   roles:
-    - role: webserver
     - role: botserver

@@ -9,10 +9,6 @@ target_production="production"
 
 full=false
 
-address_vagrant="192.168.33.10"
-address_staging=${address_vagrant}
-address_production="www.sinuousrill.com"
-
 # Prepare arguments
 
 while getopts "fa:t:" opt; do
@@ -44,13 +40,7 @@ if [ $target != $target_vagrant ] && [ $target != $target_staging ] && [ $target
     exit
 fi
 
-if [ $target == $target_vagrant ]; then
-    address=$address_vagrant
-elif [ $target == $target_staging ]; then
-    address=$address_staging
-elif [ $target == $target_production ]; then
-    address=$address_production
-fi
+address=$(sh scripts/helpers/host-address.sh $target)
 
 #Tasks
 

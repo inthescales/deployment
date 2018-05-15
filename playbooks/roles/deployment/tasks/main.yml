@@ -1,6 +1,12 @@
-- name: install git
+- name: update apt
   apt:
-    name: git
+    upgrade: yes
+    update_cache: yes
+    cache_valid_time: 86400 #One day
+#
+#- name: install git
+#  apt:
+#    name: git
 
 - name: Add deploy group
   group:

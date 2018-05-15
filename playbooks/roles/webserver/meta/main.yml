@@ -1,5 +1,6 @@
 ---
 dependencies:
+  - role: deployment
   - role: nginx
     configuration_templates:
       enable: true
@@ -13,5 +14,4 @@ dependencies:
         server_name: localhost
         root: /var/www/html/site
         index: main_en.html index.html index.htm
-  - role: deployment
   
