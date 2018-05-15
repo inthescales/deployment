@@ -1,0 +1,1 @@
+grep $1 hosts/deploy-hosts | sed -n 's/.*=\(.*\)/\1/p'
