@@ -3,6 +3,8 @@
 user="root"
 default_destination="/var/www/html/site/"
 
+mkdir temp
+
 # Prepare arguments
 
 while getopts ":u:t:d:" opt; do
@@ -33,15 +35,26 @@ address=$(sh scripts/helpers/host-address.sh $target)
 
 # Update from repository
 
-cd repositories/Sinuous-Rill-Site/
+cd repositories/inthescales-site/
 git pull origin master
 cd ../..
 
 # Build static site
 
-cd repositories/Sinuous-Rill-Site/
-ruby sitegen.rb
+cd repositories/inthescales-site/
+ruby generate.rb
 cd ../..
+
+# Update pages
+
+cd repositories/pages
+git pull origin master
+cd ../..
+
+# Move to temp directory
+
+cp -r repositories/inthescales-site/output/ temp/site
+rsync -r --exclude=".*" repositories/pages temp/site
 
 # Prepare remote for copy
 
@@ -49,6 +62,7 @@ ssh -o "StrictHostKeyChecking no" "$user@$address" "rm -rf $dest; sudo mkdir -p 
 
 # Copy files to destination
 
-scp -r -o 'StrictHostKeyChecking no' repositories/Sinuous-Rill-Site/output/* "${user}@${address}:${dest}"
+scp -r -o 'StrictHostKeyChecking no' temp/site/* "${user}@${address}:${dest}"
 
+rm -rf temp
 exit
