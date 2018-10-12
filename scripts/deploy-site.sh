@@ -51,10 +51,17 @@ cd repositories/pages
 git pull origin master
 cd ../..
 
+# Update files
+
+cd repositories/files
+git pull origin master
+cd ../..
+
 # Move to temp directory
 
 cp -r repositories/inthescales-site/output/ temp/site
 rsync -r --exclude=".*" repositories/pages temp/site
+rsync -r --exclude-from ".gitignore" repositories/files temp/site
 
 # Prepare remote for copy
 
