@@ -73,11 +73,6 @@ if [ -s scripts/setup.sh ]; then
 fi
 cd ../../..
 
-# Stop previous instance
-
-ssh -o "StrictHostKeyChecking no" "$user@$address" "cd $dest; sh scripts/shutdown.sh"
-echo "Deactivated running bot"
-
 # Prepare remote for copy
 
 ssh -o "StrictHostKeyChecking no" "$user@$address" "sudo rm -rf $dest; sudo mkdir -p $dest; sudo chown deploy:deploy $dest"
