@@ -63,13 +63,12 @@ cp -r repositories/inthescales-site/output/ temp/site
 rsync -r --exclude=".*" repositories/pages temp/site
 rsync -r --exclude-from ".gitignore" repositories/files temp/site
 
-# Prepare remote for copy
-
-ssh -o "StrictHostKeyChecking no" "$user@$address" "sudo rm -rf $dest; sudo mkdir -p $dest; sudo chown deploy:deploy $dest"
-
 # Copy files to destination
 
-scp -r -o 'StrictHostKeyChecking no' temp/site/* "${user}@${address}:${dest}"
+rsync -azP --delete temp/site/ "${user}@${address}:${dest}" --exclude=".git"
+
+# Cleanup
 
 rm -rf temp
+
 exit
