@@ -53,12 +53,6 @@ bot_repo="repositories/bots/$bot"
 
 address=$(sh scripts/helpers/host-address.sh $target)
 
-# Update bot buddy
-
-cd $buddy_repo
-git pull origin master
-cd ../../..
-
 # Update bot repository
 
 cd $bot_repo
@@ -73,15 +67,10 @@ if [ -s scripts/setup.sh ]; then
 fi
 cd ../../..
 
-# Prepare remote for copy
-
-ssh -o "StrictHostKeyChecking no" "$user@$address" "sudo rm -rf $dest; sudo mkdir -p $dest; sudo chown deploy:deploy $dest"
-
 # Copy files to destination
 
-scp -r -o 'StrictHostKeyChecking no' $(sh $bot_repo/scripts/files.sh $bot_repo) "${user}@${address}:${dest}"
-scp -r -o 'StrictHostKeyChecking no' $buddy_repo/botbuddy.py "${user}@${address}:${dest}"
-scp -r -o 'StrictHostKeyChecking no' credentials/bots/$bot/creds.json "${user}@${address}:${dest}"
+rsync -r --exclude=".*" $(sh $bot_repo/scripts/files.sh $bot_repo) "${user}@${address}:${dest}"
+rsync -r --exclude=".*" credentials/bots/$bot/creds.json "${user}@${address}:${dest}"
 
 echo "Deployed bot $bot"
 
