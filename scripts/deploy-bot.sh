@@ -2,8 +2,6 @@
 
 user="root"
 
-buddy_repo="repositories/bots/bot-buddy/"
-
 # Prepare arguments
 
 while getopts ":u:t:d:b:" opt; do
@@ -33,11 +31,6 @@ fi
 
 if [ ! -d $bot_repo ]; then
     echo "Error: must set up bot directory"
-    exit
-fi
-
-if [ ! -d $buddy_repo ]; then
-    echo "Error: must set up bot-buddy directory"
     exit
 fi
 
