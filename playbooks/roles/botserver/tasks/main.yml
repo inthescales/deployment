@@ -1,11 +1,17 @@
-- name: install python 2.7.6
+- name: install python 3
   apt:
-    name: python2.7
+    name: python3
 
 - name: install pip
   apt:
-    name: python-pip
+    name: python3-pip
 
 - name: install python package tweepy
   pip:
+    executable: pip3
     name: tweepy
+
+- name: install python package Mastodon.py
+  pip:
+    executable: pip3
+    name: Mastodon.py
