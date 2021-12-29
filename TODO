@@ -1,0 +1,3 @@
+To do:
+- Nginx root isn't properly configured on provisioning
+- /var/www/ permissions aren't set on provisioning
