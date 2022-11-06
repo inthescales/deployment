@@ -34,7 +34,9 @@ if [ -z ${target} ]; then
     exit
 fi
 
-if [ $target != $target_vagrant ] && [ $target != $target_staging ] && [ $target != $target_production ]; then
+if [ $target != $target_vagrant ] \
+    && [ $target != $target_staging ] \
+    && [ $target != $target_production ]; then
 
     echo "Error: invalid target"
     exit
@@ -42,7 +44,7 @@ fi
 
 address=$(sh scripts/helpers/host-address.sh $target)
 
-#Tasks
+# Tasks
 
 provision()
 {

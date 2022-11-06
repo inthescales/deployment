@@ -33,6 +33,8 @@ fi
 
 address=$(sh scripts/helpers/host-address.sh $target)
 
+# Update the main site
+
 # Update from repository
 
 cd repositories/inthescales-site/
@@ -45,11 +47,15 @@ cd repositories/inthescales-site/
 ruby generate.rb
 cd ../..
 
+cp -r repositories/inthescales-site/output/ temp/site
+
 # Update pages
 
 cd repositories/pages
 git pull origin master
 cd ../..
+
+rsync -r --exclude=".*" repositories/pages temp/site
 
 # Update files
 
@@ -57,11 +63,12 @@ cd repositories/files
 git pull origin master
 cd ../..
 
-# Move to temp directory
-
-cp -r repositories/inthescales-site/output/ temp/site
-rsync -r --exclude=".*" repositories/pages temp/site
 rsync -r --exclude-from ".gitignore" repositories/files temp/site
+
+# Update subsites
+
+sh scripts/subsites-build.sh
+sh scripts/subsites-copy.sh -t temp/site
 
 # Copy files to destination
 
