@@ -31,7 +31,7 @@ if [ ${target} != ${k_vagrant} ]; then
     
     # Install dependencies for and run ansible
     
-    ssh -o "StrictHostKeyChecking no" "${provisioning_user}@$target" "apt-get install python"
+    ssh -o "StrictHostKeyChecking no" "${provisioning_user}@${address}" "apt-get install python3"
     ansible-playbook playbooks/playbook-site.yml -i "hosts/${target}-hosts" -vvvv
 fi
 

@@ -24,7 +24,7 @@
   authorized_key:
     user: deploy
     state: present
-    key: "{{ lookup('file', '/Users/robin/.ssh/id_rsa.pub') }}"
+    key: "{{ lookup('file', '/Users/robin/.ssh/deployment_key.pub') }}"
     
 - name: Allow 'deploy' group to have passwordless sudo
   lineinfile:
