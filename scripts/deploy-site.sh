@@ -65,10 +65,6 @@ cd ../..
 
 rsync -r --exclude-from ".gitignore" repositories/files temp/site
 
-# Update subsites
-
-sh scripts/subsites-build.sh
-sh scripts/subsites-copy.sh -t temp/site
 
 # Copy files to destination
 
